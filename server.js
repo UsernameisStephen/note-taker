@@ -10,7 +10,7 @@ const port = process.env.port || 3000;
 //middleware for pairing json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('Devlop/public'));
+app.use(express.static('public'));
 
 //set route for homepage
 app.get('/', function (req, res) {
