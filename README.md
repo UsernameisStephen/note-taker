@@ -16,6 +16,8 @@
 
 ## Installation
 
+Here is a link to my app on [Heroku](https://sme-note-taker.herokuapp.com/)
+
 ## Usage
 
 https://sme-note-taker.herokuapp.com/
