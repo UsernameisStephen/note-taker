@@ -4,7 +4,7 @@ const fs = require('fs');
 
 // Setup our express specific variables
 const app = express()
-const port = process.env.port || 3000;
+const port = process.env.port || 3001;
 
 
 //middleware for pairing json
