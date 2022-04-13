@@ -1,56 +1,79 @@
 // Import our dependencies
 const express = require('express');
 const fs = require('fs');
+const util = require('util');
+const apiRoute = require('./routes/apiRoute');
+const htmlRoute = require('./routes/htmlRoute');
 
 // Setup our express specific variables
 const app = express()
-const port = process.env.port || 3001;
+const port = process.env.PORT || 4000;
+const uuidv1 = require('uuid/v1');
 
 
 //middleware for pairing json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use('/api', apiRoute);
+app.use('/', htmlRoute);
 
-//set route for homepage
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-  });
-  
-  // set route for notes
-app.get('/notes', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public/notes.html'));
-  });
-  
-// Set our '/api/notes' route.
-app.get('/api/notes/', function (req, res) {
-    // Read the db file so we can put it on a page
-    fs.readFile(__dirname + '/db/db.json', (err, data) => {
-      // Parse our db.json data
-      var json = JSON.parse(data);
-      return res.json(json);
-    })
-});
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
-//catch-all to redirect to index.html
-app.get('*', function(req, res) {
-    res.sendFile((__dirname + '/public/index.html'));
-});
+class Store {
+  read() {
+    return readFileAsync('db/db.json', 'utf8');
+  }
 
-// Express Routes 
-app.post("/api/notes/", function (req, res) {
-    newNote = req.body;
-  
-    // Get the JSON file from /db/ and parse it so we can add to it
-    fs.readFile(__dirname + "/db/db.json", (err, data) => {
-      var json = JSON.parse(data);
-      // Push our new note in from our user's request.
-      json.push(newNote);
-  
-      // Write the JSON file over with our new contents.
-      fs.writeFileSync(__dirname + "/db/db.json", JSON.stringify(json));
+  write(note) {
+    return writeFileAsync('db/db.json', JSON.stringify(note));
+  }
+
+  getNotes() {
+    return this.read().then((notes) => {
+      let parsedNotes;
+
+      // If notes isn't an array or can't be turned into one, send back a new empty array
+      try {
+        parsedNotes = [].concat(JSON.parse(notes));
+      } catch (err) {
+        parsedNotes = [];
+      }
+
+      return parsedNotes;
     });
-});
+  }
+
+  addNote(note) {
+    const { title, text } = note;
+
+    if (!title || !text) {
+      throw new Error("Note 'title' and 'text' cannot be blank");
+    }
+
+    // Add a unique id to the note using uuid package
+    const newNote = { title, text, id: uuidv1() };
+
+    // Get all notes, add the new note, write all the updated notes, return the newNote
+    return this.getNotes()
+      .then((notes) => [...notes, newNote])
+      .then((updatedNotes) => this.write(updatedNotes))
+      .then(() => newNote);
+  }
+
+  removeNote(id) {
+    // Get all notes, remove the note with the given id, write the filtered notes
+    return this.getNotes()
+      .then((notes) => notes.filter((note) => note.id !== id))
+      .then((filteredNotes) => this.write(filteredNotes));
+  }
+}
+
+module.exports = new Store();
+
+
+
 
 //Start our server app listener
 app.listen(port, () =>

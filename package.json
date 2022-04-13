@@ -1,23 +1,18 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "An application which allows a user to enter, save, and retrieve notes.",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "author": "",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "get-uid": "^1.0.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/usernameisstephen/note-taker.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/usernameisstephen/note-taker/issues"
-  },
-  "homepage": "https://github.com/usernameisstephen/note-taker#readme"
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
