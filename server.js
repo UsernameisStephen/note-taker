@@ -4,11 +4,12 @@ const fs = require('fs');
 const util = require('util');
 const apiRoute = require('./routes/apiRoute');
 const htmlRoute = require('./routes/htmlRoute');
+const uuid = require('uuid');
 
 // Setup our express specific variables
 const app = express()
-const port = process.env.PORT || 4000;
-const uuidv1 = require('uuid/v1');
+const port = process.env.PORT || 3001;
+
 
 
 //middleware for pairing json
@@ -53,7 +54,7 @@ class Store {
     }
 
     // Add a unique id to the note using uuid package
-    const newNote = { title, text, id: uuidv1() };
+    const newNote = { title, text, id: uuid() };
 
     // Get all notes, add the new note, write all the updated notes, return the newNote
     return this.getNotes()
