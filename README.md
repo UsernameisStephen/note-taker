@@ -16,11 +16,11 @@
 
 ## Installation
 
-Here is a link to my app on [Heroku](https://sme-note-taker.herokuapp.com/)
+Here is a link to my app on [Heroku](https://obscure-bayou-89888.herokuapp.com/)
 
 ## Usage
 
-https://sme-note-taker.herokuapp.com/
+https://obscure-bayou-89888.herokuapp.com/
 
 ## License
 
