@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
+//require in new file 'store'
+const store = require('../db/store');
 
 
 router.get('/notes', (req, res) => {
