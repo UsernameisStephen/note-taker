@@ -16,11 +16,15 @@
 
 ## Installation
 
-Here is a link to my app on [Heroku](https://selliott-note-taker.herokuapp.com/)
+No installation needed. Once you click on the application link you will be sent to the website.
 
 ## Usage
 
-https://selliott-note-taker.herokuapp.com/
+Click [here](https://selliott-note-taker.herokuapp.com/) to visit the website.
+
+Once you are there, you should see a text area where you can add a title. Underneath the title is where you will type-in any notation. Once you start your notation, a save button will appear on the top right of the page next to the "add note" button.
+
+Once you save your note, it will appear in a table on the left side of your page. You can click on each individual note and edit them at any time.
 
 ## License
 
