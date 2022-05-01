@@ -16,11 +16,11 @@
 
 ## Installation
 
-Here is a link to my app on [Heroku](https://obscure-bayou-89888.herokuapp.com/)
+Here is a link to my app on [Heroku](https://selliott-note-taker.herokuapp.com/)
 
 ## Usage
 
-https://obscure-bayou-89888.herokuapp.com/
+https://selliott-note-taker.herokuapp.com/
 
 ## License
 
