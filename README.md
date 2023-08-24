@@ -20,7 +20,7 @@ No installation needed. Once you click on the application link you will be sent 
 
 ## Usage
 
-Click [here](https://selliott-note-taker.herokuapp.com/) to visit the website.
+Click [here]([https://selliott-note-taker.herokuapp.com/](https://note-taker-sme-3c8092246028.herokuapp.com/)) to visit the website.
 
 Once you are there, you should see a text area where you can add a title. Underneath the title is where you will type-in any notation. Once you start your notation, a save button will appear on the top right of the page next to the add note button.
 
